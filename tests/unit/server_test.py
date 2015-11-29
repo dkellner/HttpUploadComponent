@@ -12,16 +12,6 @@ def fakeos():
         )
         return fakeos
 
-def test_file_not_found_error_exists():
-    """
-    Ensure that FileNotFound error exists (as a fallback for Python 2.7).
-    """
-
-    try:  # pragma: no cover
-        FileNotFoundError
-    except NameError:  # pragma: no cover
-        server.FileNotFoundError
-
 def test_path_normalization():
     """
     Ensure that paths are properly normalized to prevent accessing '../'
@@ -49,7 +39,7 @@ def test_path_normalization():
     }
 
     for key in cases.keys():
-        assert cases[key] == server.normalize_path(key)
+        assert cases[key] == server.normalize_path(key, 0)
 
 def test_expire_no_kill_event(fakeos):
     """
